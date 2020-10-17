@@ -21,11 +21,10 @@ namespace RosSharp.RosBridgeClient
     public abstract class UnityServiceProvider<Tin, Tout> : MonoBehaviour where Tin : Message where Tout : Message
     {
         public string ServiceName;
-        protected string ServiceId;
 
         protected virtual void Start()
         {
-            ServiceId = GetComponent<RosConnector>().RosSocket.AdvertiseService<Tin, Tout>(ServiceName, ServiceCallHandler);
+            GetComponent<RosConnector>().RosSocket.AdvertiseService<Tin, Tout>(ServiceName, ServiceCallHandler);
         }
 
         protected abstract bool ServiceCallHandler(Tin request, out Tout response);

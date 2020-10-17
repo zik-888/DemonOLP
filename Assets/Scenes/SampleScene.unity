@@ -1630,6 +1630,8 @@ GameObject:
   m_Component:
   - component: {fileID: 553538634}
   - component: {fileID: 553538633}
+  - component: {fileID: 553538636}
+  - component: {fileID: 553538637}
   - component: {fileID: 553538635}
   m_Layer: 0
   m_Name: RosConnector
@@ -1637,7 +1639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &553538633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,9 +1653,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SecondsTimeout: 10
-  Serializer: 0
-  protocol: 1
-  RosBridgeServerUrl: ws://192.168.56.102:9090
+  Serializer: 1
+  protocol: 0
+  RosBridgeServerUrl: ws://192.168.1.5:9090
 --- !u!4 &553538634
 Transform:
   m_ObjectHideFlags: 0
@@ -1675,11 +1677,58 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553538632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 226576ad540007b49813e7072673b817, type: 3}
+  m_Script: {fileID: 11500000, guid: 705f9408f07cb1d42a76f8cf1c3ddfaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionName: 
+  fibonacciOrder: 20
+  status: 
+  feedback: 
+  result: 
+--- !u!114 &553538636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553538632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8556a25e4812f340810dbc9cd8f6a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanningActionClient:
+    timeStep: 0
+    actionName: 
+    status: 
+    feedback: 
+    result: 
+  actionName: scanning_node
+  order:
+    x1: 5
+    y1: 5
+    x2: 10
+    y2: 5
+    material: 
+--- !u!114 &553538637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553538632}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4355442cb70d0d141b19c00a7f34ccfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: do_dishes
+  order: 20
+  status: 
+  feedback: 
+  result: 
 --- !u!1 &561236563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3494,7 +3543,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 553538635}
+      - m_Target: {fileID: 0}
         m_MethodName: StartScann
         m_Mode: 1
         m_Arguments:
@@ -5862,7 +5911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 679864592}
-  objPath: Assets/Model DataBase/Test.obj
   parentObject: {fileID: 1040516283}
   testObject: {fileID: 0}
   material: {fileID: 2100000, guid: 9d66307269c5c5a4486a05aa7a117bf3, type: 2}

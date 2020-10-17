@@ -11,8 +11,8 @@ using Microsoft.Win32;
 public class ObjImportFile : MonoBehaviour
 {
     public InputField inputField;
-    public string objPath = @"Assets/Model DataBase/Test.obj";
-    //protected string objPath = @"Assets/Model DataBase/cube/untitled.obj";
+    //public string objPath = @"Assets/Model DataBase/Test.obj";
+    protected string objPath = @"Assets/Model DataBase/cube/untitled.obj";
     public GameObject parentObject;
 
     public GameObject testObject;
@@ -52,45 +52,6 @@ public class ObjImportFile : MonoBehaviour
         }
         else
         {
-            //if (objPath == "1")
-            //{
-            //    var loadedObject = Instantiate(testObject);
-            //    loadedObject.name = name;
-            //    loadedObject.transform.parent = parentObject.transform;
-            //    loadedObject.transform.localScale = Vector3.one;
-            //    loadedObject.AddComponent<MeshCollider>();
-            //    loadedObject.AddComponent<MeshFilter>();
-            //    loadedObject.GetComponent<MeshRenderer>().material = material;
-            //    loadedObject.name = name;
-            //    return loadedObject;
-            //}
-            //else if(objPath == "2")
-            //{
-            //    var loadedObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            //    Destroy(loadedObject.GetComponent<BoxCollider>());
-            //    loadedObject.transform.parent = parentObject.transform;
-            //    loadedObject.transform.localScale = Vector3.one;
-            //    loadedObject.AddComponent<MeshCollider>();
-            //    loadedObject.GetComponent<MeshRenderer>().material = material;
-            //    loadedObject.name = name;
-            //    return loadedObject;
-            //}
-            //else
-            //{
-            //    var loadedObject = new OBJLoader().Load(objPath).transform.GetChild(0).gameObject;
-            //    //var loadedObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            //    //Destroy(loadedObject.GetComponent<BoxCollider>());
-
-            //    loadedObject.transform.parent = parentObject.transform;
-            //    loadedObject.transform.localScale = Vector3.one;
-            //    loadedObject.AddComponent<MeshCollider>();
-            //    //loadedObject.AddComponent<MeshCollider>().convex = true;
-            //    //loadedObject.AddComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //    loadedObject.GetComponent<MeshRenderer>().material = material;
-            //    //loadedObject.AddComponent<PolygonalModel>();
-            //    loadedObject.name = name;
-            //    return loadedObject;
-            //}
             try
             {
                 GameLog.Log(objPath);

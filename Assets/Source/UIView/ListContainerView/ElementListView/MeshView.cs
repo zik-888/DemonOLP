@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class MeshView : ElementListView, ISelectHandler
 {
-    MeshInitializer meshInitializer;
+    MeshInitializer meshInitializer { set; get; }
     CamMoveControl cmc;
 
     private new void Awake()

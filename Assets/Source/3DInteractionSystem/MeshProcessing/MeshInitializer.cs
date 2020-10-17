@@ -5,6 +5,8 @@ using thelab.mvc;
 using UnityEngine;
 using System.Threading.Tasks;
 using UniRx;
+using System.IO;
+using System;
 
 /// <summary>
 /// Класс инициализирует модель меша.
@@ -13,6 +15,9 @@ using UniRx;
 public class MeshInitializer : Element<DemonOLPApplication>
 {
     public CustomMesh SelfMesh { set; get; }
+
+    public NMesh nMesh;
+
     protected PointHighlight highlighter;
 
     protected bool isHLVertexWork = true;
@@ -50,8 +55,36 @@ public class MeshInitializer : Element<DemonOLPApplication>
             highlighter = gameObject.AddComponent<PointHighlight>();
 
         SelfMesh = await InitMeshAsync(protoMesh.vertices, protoMesh.triangles);
+
+
+        //await StartCoroutine(TestCoroutine());
+
         //SelfMesh = new CustomMesh(protoMesh.vertices, protoMesh.triangles);
 
+
+        //new NEdge()
+
+
+        //nMesh = new NMesh(protoMesh.vertices, protoMesh.triangles);
+    }
+
+
+    IEnumerator TestCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        var a = new Vector3[] { new Vector3(1, 1, -1), new Vector3(-1, 1, -1), new Vector3(-1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, -1, 1), new Vector3(1, 1, 1), new Vector3(-1, 1, 1), new Vector3(-1, -1, 1), new Vector3(-1, -1, 1), new Vector3(-1, 1, 1), new Vector3(-1, 1, -1), new Vector3(-1, -1, -1), new Vector3(-1, -1, -1), new Vector3(1, -1, -1), new Vector3(1, -1, 1), new Vector3(-1, -1, 1), new Vector3(1, -1, -1), new Vector3(1, 1, -1), new Vector3(1, 1, 1), new Vector3(1, -1, 1), new Vector3(-1, -1, -1), new Vector3(-1, 1, -1), new Vector3(1, 1, -1), new Vector3(1, -1, -1) };
+        var b = new int[] { 0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19, 16, 20, 21, 22, 22, 23, 20 };
+
+
+
+        Mesh mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
+        mesh.vertices = a;
+        mesh.triangles = b;
+
+        Debug.Log(Time.deltaTime);
     }
 
     protected async Task<CustomMesh> InitMeshAsync(Vector3[] vertices, int[] triangles)
@@ -64,4 +97,42 @@ public class MeshInitializer : Element<DemonOLPApplication>
         Debug.Log("Finish Task");
         return a;
     }
+
+
+    protected void SerializeVertexAndTriangle(Vector3 [] vertices, int[] triangles)
+    {
+        string writePath = @"C:\Users\HaoAsakura\YandexDisk\SS_ISH\Демонстратор\DemonOLP\hta.txt";
+
+        string text = "";
+
+        text += "[ ";
+        foreach (var a in vertices)
+        {
+            text += $"new Vector3({a.x}, {a.y}, {a.z}), ";
+        }
+        text += " ]";
+
+        text += "\r\n";
+
+        text += "[ ";
+        foreach (var a in triangles)
+        {
+            text += $"{a}, ";
+        }
+        text += " ]";
+
+        try
+        {
+            using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(text);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
+    }
+
 }
