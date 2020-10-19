@@ -9,6 +9,7 @@ public class DemonOLPModel : Model<DemonOLPApplication>
     public bool loadedAmination = false;
     public ReactiveProperty<bool> LoadedAmination { set; get; } = new ReactiveProperty<bool>(false);
 
+    public Mesh CurrentLoadScannModel { set; get; }
 
     /// <summary>
     /// Programm data.

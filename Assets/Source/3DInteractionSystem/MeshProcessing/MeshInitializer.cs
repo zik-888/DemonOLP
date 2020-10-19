@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UniRx;
 using System.IO;
 using System;
+using System.Linq;
 
 /// <summary>
 /// Класс инициализирует модель меша.
@@ -54,7 +55,12 @@ public class MeshInitializer : Element<DemonOLPApplication>
         if (IsHLVertexWork == true)
             highlighter = gameObject.AddComponent<PointHighlight>();
 
-        SelfMesh = await InitMeshAsync(protoMesh.vertices, protoMesh.triangles);
+        //SelfMesh = await InitMeshAsync(protoMesh.vertices, protoMesh.triangles);
+
+        foreach (var a in protoMesh.normals)
+        {
+            print(a.ToString());
+        }
 
 
         //await StartCoroutine(TestCoroutine());
@@ -75,16 +81,21 @@ public class MeshInitializer : Element<DemonOLPApplication>
 
         var a = new Vector3[] { new Vector3(1, 1, -1), new Vector3(-1, 1, -1), new Vector3(-1, 1, 1), new Vector3(1, 1, 1), new Vector3(1, -1, 1), new Vector3(1, 1, 1), new Vector3(-1, 1, 1), new Vector3(-1, -1, 1), new Vector3(-1, -1, 1), new Vector3(-1, 1, 1), new Vector3(-1, 1, -1), new Vector3(-1, -1, -1), new Vector3(-1, -1, -1), new Vector3(1, -1, -1), new Vector3(1, -1, 1), new Vector3(-1, -1, 1), new Vector3(1, -1, -1), new Vector3(1, 1, -1), new Vector3(1, 1, 1), new Vector3(1, -1, 1), new Vector3(-1, -1, -1), new Vector3(-1, 1, -1), new Vector3(1, 1, -1), new Vector3(1, -1, -1) };
         var b = new int[] { 0, 1, 2, 2, 3, 0, 4, 5, 6, 6, 7, 4, 8, 9, 10, 10, 11, 8, 12, 13, 14, 14, 15, 12, 16, 17, 18, 18, 19, 16, 20, 21, 22, 22, 23, 20 };
-
+        //var c = GetComponent<MeshFilter>().mesh.normals;
 
 
         Mesh mesh = new Mesh();
-        GetComponent<MeshFilter>().mesh = mesh;
+        
 
         mesh.vertices = a;
         mesh.triangles = b;
+        mesh.normals = CustomMesh.GetNormals(a, b);
 
-        Debug.Log(Time.deltaTime);
+
+        GameObject gameObject = new GameObject("ScannModel", typeof(MeshFilter), typeof(MeshRenderer));
+        gameObject.GetComponent<MeshFilter>().mesh = mesh;
+
+        Debug.Log(Time.deltaTime + "Create");
     }
 
     protected async Task<CustomMesh> InitMeshAsync(Vector3[] vertices, int[] triangles)
@@ -135,4 +146,7 @@ public class MeshInitializer : Element<DemonOLPApplication>
 
     }
 
+
+
+    
 }

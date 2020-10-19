@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 
 public class MeshView : ElementListView, ISelectHandler
 {
-    MeshInitializer meshInitializer { set; get; }
-    CamMoveControl cmc;
+    protected MeshInitializer meshInitializer { set; get; }
+    protected CamMoveControl cmc;
 
     private new void Awake()
     {
@@ -17,24 +17,21 @@ public class MeshView : ElementListView, ISelectHandler
         app.model.meshModelNameArray.Add(gameObject.name);
         textID.text = textID.name + " " + keyID.ToString();
         ListType = ListType.Mesh;
-
         meshInitializer = app.view.meshContainerView.importer.Load(keyID.ToString()).AddComponent<MeshInitializer>();
 
         ////////////////////////////////////////////////////////////
         
         cmc = gameObject.AddComponent<CamMoveControl>();
-
         StartCoroutine(cmc.PositionAnObject());
     }
 
     public new void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);
-
         StartCoroutine(cmc.PositionAnObject());
     }
 
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         Destroy(meshInitializer.gameObject);
     }

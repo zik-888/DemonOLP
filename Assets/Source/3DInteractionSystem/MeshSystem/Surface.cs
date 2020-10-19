@@ -16,6 +16,8 @@ namespace MeshSystem
         public int Index { set; get; }
         public List<int> TriangleIndices { private set; get; } = new List<int>();
 
+        public Vector3 surfaceNormal;
+
         protected List<Edge> OutsideEdges { set; get; } = new List<Edge>();
 
 
@@ -32,6 +34,22 @@ namespace MeshSystem
             }
             catch { /*Debug.Log("Err");*/ }
             
+        }
+
+        public void SetNormal()
+        {
+            
+
+            var b = from tI in TriangleIndices
+                    select CustomMeshPool.GetMesh(MeshId).Triangles[tI].Normal;
+
+            var x = b.Sum(n => n.x);
+            var y = b.Sum(n => n.y);
+            var z = b.Sum(n => n.z);
+
+            int countT = TriangleIndices.Count;
+
+            surfaceNormal = new Vector3(x / countT, y / countT, z / countT);
         }
 
         public void AddTriangle(int index)

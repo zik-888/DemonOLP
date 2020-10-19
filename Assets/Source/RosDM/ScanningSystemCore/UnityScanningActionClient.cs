@@ -6,6 +6,7 @@ using UnityEngine;
 using UniRx;
 using thelab.mvc;
 using Dummiesman;
+using MeshSystem;
 
 [RequireComponent(typeof(RosConnector))]
 public class UnityScanningActionClient : Element<DemonOLPApplication>
@@ -54,10 +55,12 @@ public class UnityScanningActionClient : Element<DemonOLPApplication>
     public void InitializedModel(Vector3[] vertices, int[] triangles)
     {
 
-        var loadedOBJ = new OBJLoader().Load(@"Assets/Model DataBase/cube/untitled.obj");
+        app.model.CurrentLoadScannModel.vertices = vertices;
+        app.model.CurrentLoadScannModel.triangles = triangles;
+        app.model.CurrentLoadScannModel.normals = CustomMesh.GetNormals(vertices, triangles);
 
-        loadedOBJ.GetComponent<MeshFilter>().mesh.vertices = vertices;
-        loadedOBJ.GetComponent<MeshFilter>().mesh.triangles = triangles;
 
+        GameObject gameObject = new GameObject("ScannModel", typeof(MeshFilter), typeof(MeshRenderer));
+        gameObject.GetComponent<MeshFilter>().mesh = app.model.CurrentLoadScannModel;
     }
 }

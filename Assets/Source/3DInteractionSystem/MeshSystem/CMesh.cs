@@ -41,20 +41,6 @@ namespace MeshSystem
                     .Select((t, i) => new Triangle(Id, i, triangles[i * 3], triangles[i * 3 + 1], triangles[i * 3 + 2]))
                     .ToArray();
 
-            //for(int i = 0; Triangles.Length > i; i++)
-            //{
-            //    var temp = new Edge(triangles[i * 3], triangles[i * 3 + 1]);
-
-            //    new Edge()
-
-            //    if (vector2Ints.Contains(temp))
-            //        vector2Ints.Add();
-
-            //    vector2Ints.Add(new Vector2Int(triangles[i * 3], triangles[i * 3 + 2]));
-
-            //    vector2Ints.Add(new Vector2Int(triangles[i * 3 + 1], triangles[i * 3 + 2]));
-            //}
-
             foreach (var a in Triangles) // инициализация плоскостей
                 if (a.IndexPlane == -1)
                     a.SetPlane();
@@ -62,10 +48,17 @@ namespace MeshSystem
 
             foreach (var a in surfaceArray)
             {
+
+                a.SetNormal();
                 //if (a._index == 1)
                 //a.SetColorDebuging();
             }
 
+        }
+
+        public Vector3[] GetSurfaceNormals()
+        {
+            return surfaceArray.Select(s => s.surfaceNormal).ToArray();
         }
 
         public void SetInteractivePoints(PointHighlight pointHighlight)
@@ -128,12 +121,12 @@ namespace MeshSystem
 
         static async public Task<Triangle[]> InitCustomMeshAsync(int[] triangles, int id)
         {
-            Triangle[] Triangles = await Task.Run(() => InitCustomMesch(triangles, id));
+            Triangle[] Triangles = await Task.Run(() => InitCustomMesh(triangles, id));
 
             return Triangles;
         }
 
-        static protected Triangle[] InitCustomMesch(int[] triangles, int id)
+        static protected Triangle[] InitCustomMesh(int[] triangles, int id)
         {
             Triangle[] Triangles = new Triangle[triangles.Length / 3];
 
@@ -148,6 +141,81 @@ namespace MeshSystem
 
             return Triangles;
         }
+
+
+        /// <summary>
+        /// Расчет нормалей
+        /// </summary>
+        /// <param name="vertices">Набор координат точек</param>
+        /// <param name="faces">Набор индексов точек, объединямых 
+        /// в треугольники</param>
+        /// <returns></returns>
+        public static Vector3[] GetNormals(Vector3[] vertices, int[] faces)
+        {
+            // Массив нормалей
+            var normals = new Vector3[vertices.Length];
+
+            // Инициализация нулями
+            for (int i = 0; i < normals.Length; i++)
+            {
+                normals[i] = new Vector3(0, 0, 0);
+            }
+
+            // Перебор всех треугольников
+            for (int i = 0; i < faces.Length; i += 3)
+            {
+                float nx = float.NaN, ny = float.NaN, nz = float.NaN;
+                int counter = 0;
+
+                Vector3 a, b, c;
+
+                // Возможные комбинации следования точек в треугольнике
+                var ind = new[] {
+                                  i, i + 1, i + 2,
+                                  i, i + 2, i + 1,
+                                  i + 1, i, i + 2,
+                                  i + 1, i + 2, i,
+                                  i + 2, i, i +1,
+                                  i + 2, i + 1, i
+                                };
+
+                int indOffset = 0;
+
+                // Расчет нормали если она не была расчитана на предыдущей 
+                // итерации
+                while (float.IsNaN(nx) && float.IsNaN(ny) && float.IsNaN(nz) && counter < 6)
+                {
+                    a = vertices[faces[ind[indOffset + 0]]];
+                    b = vertices[faces[ind[indOffset + 1]]];
+                    c = vertices[faces[ind[indOffset + 2]]];
+
+                    var A = a - b;
+                    var B = b - c;
+
+                    var Nx = A.y * B.z - A.z * B.y;
+                    var Ny = A.z * B.x - A.x * B.z;
+                    var Nz = A.x * B.y - A.y * B.x;
+
+                    var len = (float)Math.Sqrt(Nx * Nx + Ny * Ny + Nz * Nz);
+
+                    nx = Nx / len;
+                    ny = Ny / len;
+                    nz = Nz / len;
+
+                    indOffset += 3;
+                    counter += 1;
+                }
+
+                var fn = new Vector3(nx, ny, nz);
+
+                normals[faces[ind[indOffset]]] = fn;
+                normals[faces[ind[indOffset + 1]]] = fn;
+                normals[faces[ind[indOffset + 2]]] = fn;
+            }
+
+            return normals;
+        }
+
     }
 }
 

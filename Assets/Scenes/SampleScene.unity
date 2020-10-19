@@ -1639,7 +1639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &553538633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3703,7 +3703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notification: MeshContainer
-  elementListPrefab: {fileID: 1496717209487064294, guid: 2c6faaa7ae081414182ca001547ed932,
+  elementListPrefab: {fileID: 3855314854017595234, guid: af31cde34a8050446967c617b678db2c,
     type: 3}
   reorderableList: {fileID: 273364085}
   keyCounter: 0

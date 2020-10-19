@@ -5,7 +5,6 @@ using UnityEngine;
 public class MeshContainerView : ListContainerView
 {
     public ObjImportFile importer;
-
     override protected IEnumerator ContainerUpdateInNextFrame()
     {
         yield return new WaitForEndOfFrame();
@@ -17,4 +16,5 @@ public class MeshContainerView : ListContainerView
             reorderableList.Content.GetChild(i).GetComponent<MeshView>().UpdateNumElement(i);
         }
     }
+
 }
