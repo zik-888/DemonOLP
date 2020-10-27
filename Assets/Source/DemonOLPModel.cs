@@ -4,13 +4,18 @@ using thelab.mvc;
 using UnityEngine;
 using UniRx;
 
+public enum PathFormMethod { PointToPoint, PickMarching, DrawProjection };
+
 public class DemonOLPModel : Model<DemonOLPApplication>
 {
     public bool loadedAmination = false;
     public ReactiveProperty<bool> LoadedAmination { set; get; } = new ReactiveProperty<bool>(false);
 
+    public bool IsLoadScannModel { set; get; } = false;
     public Mesh CurrentLoadScannModel { set; get; }
-
+    public Material baseMaterial;
+    public PathFormMethod pathFormMethod = PathFormMethod.PointToPoint;
+    public List<ITrajectory> Trajectories { set; get; } = new List<ITrajectory>();
     /// <summary>
     /// Programm data.
     /// </summary>

@@ -11,7 +11,6 @@
 
 using RosSharp.RosBridgeClient.MessageTypes.Shape;
 using RosSharp.RosBridgeClient.MessageTypes.Geometry;
-using UnityEngine;
 
 namespace RosSharp.RosBridgeClient.MessageTypes.ScanningSystemCore
 {
@@ -30,27 +29,6 @@ namespace RosSharp.RosBridgeClient.MessageTypes.ScanningSystemCore
         }
 
         public ScanningResult(MeshTriangle[] triangles, Point[] vertices)
-        {
-            this.triangles = triangles;
-            this.vertices = vertices;
-        }
-
-
-    }
-
-    public class ScanningResultUnity
-    {
-        // result definition
-        public MeshTriangle[] triangles { get; set; }
-        public Point[] vertices { get; set; }
-
-        public ScanningResultUnity()
-        {
-            this.triangles = new MeshTriangle[0];
-            this.vertices = new Point[0];
-        }
-
-        public ScanningResultUnity(MeshTriangle[] triangles, Point[] vertices)
         {
             this.triangles = triangles;
             this.vertices = vertices;

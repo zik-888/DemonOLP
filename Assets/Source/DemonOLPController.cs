@@ -75,4 +75,11 @@ public class DemonOLPController : Controller<DemonOLPApplication>
     private void Update()
     {
     }
+
+    public void AddMesh()
+    {
+        app.view.meshContainerView.Add();
+    }
+
+    
 }

@@ -44,6 +44,14 @@ public class ReferencePoint : Element<DemonOLPApplication>
 
     private void OnMouseUpAsButton()
     {
-        useMethod();
+        try
+        {
+            useMethod();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
+        
     }
 }

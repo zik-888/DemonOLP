@@ -26,7 +26,21 @@ public class CommandView : ElementListView
 
         var parentObject = new GameObject($"{nameof(CommandView)}: {name}");
         parentObject.transform.parent = app.view.meshContainerView.importer.parentObject.transform;
-        gameObject.AddComponent<PickMarching>().parentObject = parentObject;
+
+
+        switch (app.model.pathFormMethod)
+        {
+            case PathFormMethod.PointToPoint:
+                gameObject.AddComponent<PointToPoint>().parentObject = parentObject;
+                break;
+            case PathFormMethod.DrawProjection:
+                gameObject.AddComponent<DrawProjection>().parentObject = parentObject;
+                break;
+            case PathFormMethod.PickMarching:
+                gameObject.AddComponent<PickMarching>().parentObject = parentObject;
+                break;
+
+        }       
     }
 
     public void SetPointCommand()

@@ -41,15 +41,15 @@ namespace MeshSystem
                     .Select((t, i) => new Triangle(Id, i, triangles[i * 3], triangles[i * 3 + 1], triangles[i * 3 + 2]))
                     .ToArray();
 
-            foreach (var a in Triangles) // инициализация плоскостей
-                if (a.IndexPlane == -1)
-                    a.SetPlane();
+            //foreach (var a in Triangles) // инициализация плоскостей
+            //    if (a.IndexPlane == -1)
+            //        a.SetPlane();
 
 
             foreach (var a in surfaceArray)
             {
 
-                a.SetNormal();
+                //a.SetNormal();
                 //if (a._index == 1)
                 //a.SetColorDebuging();
             }

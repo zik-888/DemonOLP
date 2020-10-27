@@ -24,7 +24,7 @@ public class NMesh
 
         Id = NMeshPool.GetAvailableIndex();
         NMeshPool.Push(this);
-
+        
         Triangles = new NTriangle[triangles.Length / 3];
 
         Triangles = Triangles.AsParallel()

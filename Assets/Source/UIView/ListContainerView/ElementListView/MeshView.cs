@@ -17,12 +17,31 @@ public class MeshView : ElementListView, ISelectHandler
         app.model.meshModelNameArray.Add(gameObject.name);
         textID.text = textID.name + " " + keyID.ToString();
         ListType = ListType.Mesh;
-        meshInitializer = app.view.meshContainerView.importer.Load(keyID.ToString()).AddComponent<MeshInitializer>();
+
+        if (app.model.IsLoadScannModel)
+        {
+            meshInitializer = LoadScannModel("ScannModel").AddComponent<MeshInitializer>();
+            app.model.IsLoadScannModel = false;
+        }
+        else
+        {
+            meshInitializer = app.view.meshContainerView.importer.Load(keyID.ToString()).AddComponent<MeshInitializer>();
+        }
 
         ////////////////////////////////////////////////////////////
         
         cmc = gameObject.AddComponent<CamMoveControl>();
         StartCoroutine(cmc.PositionAnObject());
+    }
+
+    protected GameObject LoadScannModel(string name)
+    {
+        GameObject loadObject = new GameObject(name, typeof(MeshFilter), typeof(MeshRenderer));
+        loadObject.GetComponent<MeshFilter>().mesh = app.model.CurrentLoadScannModel;
+        loadObject.GetComponent<MeshRenderer>().material = app.model.baseMaterial;
+        loadObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+        loadObject.AddComponent<MeshCollider>();
+        return loadObject;
     }
 
     public new void OnSelect(BaseEventData eventData)

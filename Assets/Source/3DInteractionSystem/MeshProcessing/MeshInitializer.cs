@@ -50,18 +50,13 @@ public class MeshInitializer : Element<DemonOLPApplication>
 
     private async void Awake()
     {
+        print("GoMeshInit");
         Mesh protoMesh = gameObject.GetComponent<MeshFilter>().mesh;
 
         if (IsHLVertexWork == true)
             highlighter = gameObject.AddComponent<PointHighlight>();
 
-        //SelfMesh = await InitMeshAsync(protoMesh.vertices, protoMesh.triangles);
-
-        foreach (var a in protoMesh.normals)
-        {
-            print(a.ToString());
-        }
-
+        SelfMesh = await InitMeshAsync(protoMesh.vertices, protoMesh.triangles);
 
         //await StartCoroutine(TestCoroutine());
 
@@ -89,7 +84,9 @@ public class MeshInitializer : Element<DemonOLPApplication>
 
         mesh.vertices = a;
         mesh.triangles = b;
-        mesh.normals = CustomMesh.GetNormals(a, b);
+        //mesh.normals = CustomMesh.GetNormals(a, b);
+        //mesh.RecalculateNormals();
+
 
 
         GameObject gameObject = new GameObject("ScannModel", typeof(MeshFilter), typeof(MeshRenderer));
@@ -108,7 +105,6 @@ public class MeshInitializer : Element<DemonOLPApplication>
         Debug.Log("Finish Task");
         return a;
     }
-
 
     protected void SerializeVertexAndTriangle(Vector3 [] vertices, int[] triangles)
     {
@@ -146,7 +142,4 @@ public class MeshInitializer : Element<DemonOLPApplication>
 
     }
 
-
-
-    
 }

@@ -39,7 +39,7 @@ namespace Dummiesman
 
         //global lists, accessed by objobjectbuilder
         internal List<Vector3> Vertices = new List<Vector3>();
-        internal List<Vector3> Normals = new List<Vector3>();
+        internal List<Vector3> Normals { set; get; } = new List<Vector3>();
         internal List<Vector2> UVs = new List<Vector2>();
 
         //materials, accessed by objobjectbuilder

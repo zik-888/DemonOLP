@@ -8,19 +8,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Timers;
 using System.Linq;
+using RosSharp.RosBridgeClient.MessageTypes.Geometry;
+using RosSharp.RosBridgeClient.MessageTypes.Shape;
+using UniRx;
 
 [Serializable]
 public class ScanningActionClient : ActionClient<ScanningAction, ScanningActionGoal, ScanningActionResult,
                                                  ScanningActionFeedback, ScanningGoal, ScanningResult, ScanningFeedback>
 {
     public ScanningGoal order;
+    public ReactiveProperty<ScanningResult> reactOrder { set; get; } = new ReactiveProperty<ScanningResult>();
     public string status = "";
     public string feedback = "";
     public string result = "";
 
-    private Action<Vector3[], int[]> actionResult;
-
-    public ScanningActionClient(string actionName, RosSocket rosSocket, Action<Vector3[], int[]> actionResult)
+    public ScanningActionClient(string actionName, RosSocket rosSocket)
     {
         this.actionName = actionName;
         this.rosSocket = rosSocket;
@@ -28,8 +30,6 @@ public class ScanningActionClient : ActionClient<ScanningAction, ScanningActionG
         action = new ScanningAction();
         goalStatus = new GoalStatus();
         order = new ScanningGoal();
-
-        this.actionResult = actionResult;
     }
 
     protected override ScanningActionGoal GetActionGoal()
@@ -52,16 +52,8 @@ public class ScanningActionClient : ActionClient<ScanningAction, ScanningActionG
     {
 
         result = $"Result time: {DateTime.Now}, Length: {action.action_result.result.vertices.Length}";
-
-
-
-        var vertex = action.action_result.result.vertices.Select(v => new Vector3((float)v.x, (float)v.y, (float)v.z));
-
-        var triangle = from t in action.action_result.result.triangles
-                       from tt in t.vertex_indices
-                       select (int)tt;
-
-        actionResult(vertex.ToArray(), triangle.ToArray());
+        reactOrder.Value = action.action_result.result;
+        //actionResult(action.action_result.result.vertices, action.action_result.result.triangles);
     }
 
     public string GetStatusString()

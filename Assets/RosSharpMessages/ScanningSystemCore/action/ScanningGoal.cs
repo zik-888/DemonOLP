@@ -18,59 +18,25 @@ namespace RosSharp.RosBridgeClient.MessageTypes.ScanningSystemCore
         public const string RosMessageName = "scanning_system_core/ScanningGoal";
 
         // goal definition
-
         public float x1 { get; set; }
         public float y1 { get; set; }
         public float x2 { get; set; }
         public float y2 { get; set; }
-        public string material { get; set; }
 
         public ScanningGoal()
         {
-            this.x1 = 0.0f;
-            this.y1 = 0.0f;
-            this.x2 = 0.0f;
-            this.y2 = 0.0f;
-            this.material = "";
+            this.x1 = 0f;
+            this.y1 = 0f;
+            this.x2 = 0f;
+            this.y2 = 0f;
         }
 
-        public ScanningGoal(float x1, float y1, float x2, float y2, string material)
+        public ScanningGoal(float x1, float y1, float x2, float y2)
         {
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;
             this.y2 = y2;
-            this.material = material;
-        }
-    }
-
-    [Serializable]
-    public class ScanningGoalUnity
-    {
-        // goal definition
-
-        public float x1;
-        public float y1;
-        public float x2;
-        public float y2;
-        public string material;
-
-        public ScanningGoalUnity()
-        {
-            this.x1 = 0.0f;
-            this.y1 = 0.0f;
-            this.x2 = 0.0f;
-            this.y2 = 0.0f;
-            this.material = "";
-        }
-
-        public ScanningGoalUnity(float x1, float y1, float x2, float y2, string material)
-        {
-            this.x1 = x1;
-            this.y1 = y1;
-            this.x2 = x2;
-            this.y2 = y2;
-            this.material = material;
         }
     }
 }

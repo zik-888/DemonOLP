@@ -130,4 +130,13 @@ public class maxCamera : MonoBehaviour
             angle -= 360;
         return Mathf.Clamp(angle, min, max);
     }
+
+    public void SetProjectionToPlane()
+    {
+        //
+        transform.rotation = Quaternion.Euler(90, 0, 0);
+
+
+        transform.position = new Vector3(0, transform.position.y, 0);
+    }
 }

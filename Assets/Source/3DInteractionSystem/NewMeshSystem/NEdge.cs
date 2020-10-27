@@ -23,6 +23,13 @@ public class NEdge : IEquatable<NEdge>, IEqualityComparer<NEdge>
 
     public void AddTriangle(int triangleIndex)
     {
+
+        if (edgeId == 1)
+        {
+
+        }
+
+
         for (int i = 0; triangleIndexes.Length > i; i++)
         {
             if(triangleIndexes[i] == -1)
@@ -38,7 +45,7 @@ public class NEdge : IEquatable<NEdge>, IEqualityComparer<NEdge>
         }
     }
 
-    public NEdge(int first, int triangleIndex, int second, int meshId, Action<NEdge> addEdge)
+    public NEdge(int first, int second, int triangleIndex, int meshId, Action<NEdge> addEdge)
     {
         MeshId = meshId;
         v0.Index = first;
@@ -49,17 +56,17 @@ public class NEdge : IEquatable<NEdge>, IEqualityComparer<NEdge>
         {
 
             var edge = NMeshPool.GetMesh(meshId).Edges.Find(e => e.Equals(this));
-            //edge.AddTriangle(triangleIndex);
             addEdge(NMeshPool.GetMesh(meshId).Edges[edge.edgeId]);
+            NMeshPool.GetMesh(meshId).Edges[edge.edgeId].AddTriangle(triangleIndex);
+
         }
         else // если эдж не содержится в списке
         {
-            //AddTriangle(triangleIndex);
 
             edgeId = NMeshPool.GetMesh(meshId).Edges.Count;
             NMeshPool.GetMesh(meshId).Edges.Add(this);
-
             addEdge(this);
+            AddTriangle(triangleIndex);
 
             //Debug.DrawLine(v0.Position, v1.Position, new Color(UnityEngine.Random.value,
             //                                                   UnityEngine.Random.value,

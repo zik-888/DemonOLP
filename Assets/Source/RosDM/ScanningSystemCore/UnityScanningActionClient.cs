@@ -1,12 +1,12 @@
 ﻿using RosSharp.RosBridgeClient;
 using RosSharp.RosBridgeClient.MessageTypes.ScanningSystemCore;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using thelab.mvc;
-using Dummiesman;
-using MeshSystem;
+using System;
+using RosSharp.RosBridgeClient.MessageTypes.Geometry;
+using RosSharp.RosBridgeClient.MessageTypes.Shape;
+using System.Linq;
 
 [RequireComponent(typeof(RosConnector))]
 public class UnityScanningActionClient : Element<DemonOLPApplication>
@@ -18,7 +18,7 @@ public class UnityScanningActionClient : Element<DemonOLPApplication>
 
     public string actionName;
 
-    public ScanningGoalUnity order = new ScanningGoalUnity(5f, 50.5f, 10f, 5f, "METAL");
+    public ScanningGoalUnity order = new ScanningGoalUnity(0, -0.25f, 0, 0.325f);
 
 
     public string Status => scanningActionClient.GetStatusString();
@@ -28,8 +28,14 @@ public class UnityScanningActionClient : Element<DemonOLPApplication>
     private void Start()
     {
         rosConnector = GetComponent<RosConnector>();
-        scanningActionClient = new ScanningActionClient(actionName, rosConnector.RosSocket, InitializedModel);
+        scanningActionClient = new ScanningActionClient(actionName, rosConnector.RosSocket);
         scanningActionClient.Initialize();
+
+        scanningActionClient.reactOrder.ObserveEveryValueChanged(x => x.Value)
+                                       .Subscribe(xs => InitModel(xs))
+                                       .AddTo(this);
+
+
     }
 
     public void SendGoal()
@@ -52,15 +58,87 @@ public class UnityScanningActionClient : Element<DemonOLPApplication>
         scanningActionClient.CancelGoal();
     }
 
-    public void InitializedModel(Vector3[] vertices, int[] triangles)
+    public void InitModel(ScanningResult result)
+    {
+        if(result != null)
+        {
+            var vertex = result.vertices.Select(v => new UnityEngine.Vector3(-(float)v.y, (float)v.z, (float)v.x)).ToArray();
+
+            var triangle = (from t in result.triangles
+                           from tt in t.vertex_indices
+                           select (int)tt).ToArray();
+
+            var x = vertex.Average(p => p.x);
+            var y = vertex.Average(p => p.y);
+            var z = vertex.Average(p => p.z);
+
+            vertex = vertex.Select(v => new UnityEngine.Vector3(v.x - x, v.y - y, v.z - z)).ToArray();
+
+            UnityEngine.Mesh mesh = new UnityEngine.Mesh();
+            mesh.vertices = vertex;
+            mesh.triangles = triangle;
+            mesh.RecalculateNormals();
+            mesh.RecalculateTangents();
+            mesh.RecalculateBounds();
+            mesh.Optimize();
+
+            app.model.CurrentLoadScannModel = mesh;
+            app.model.IsLoadScannModel = true;
+            app.controller.AddMesh();
+        }
+    }
+
+    public void InitializedModel(Point[] points, MeshTriangle[] faces)
     {
 
-        app.model.CurrentLoadScannModel.vertices = vertices;
-        app.model.CurrentLoadScannModel.triangles = triangles;
-        app.model.CurrentLoadScannModel.normals = CustomMesh.GetNormals(vertices, triangles);
+        
+
+        ////app.model.CurrentLoadScannModel.vertices = vertices;
+        ////app.model.CurrentLoadScannModel.triangles = triangles;
+
+        //print($"vertices: {points.Length}");
+        //print($"triangles: {faces.Length}");
+
+        ////app.model.CurrentLoadScannModel.normals = CustomMesh.GetNormals(vertices, triangles);
 
 
-        GameObject gameObject = new GameObject("ScannModel", typeof(MeshFilter), typeof(MeshRenderer));
-        gameObject.GetComponent<MeshFilter>().mesh = app.model.CurrentLoadScannModel;
+        //GameObject gameObject = new GameObject("ScannModel", typeof(MeshFilter), typeof(MeshRenderer));
+        //Instantiate(gameObject);
+        //gameObject.GetComponent<MeshFilter>().mesh = app.model.CurrentLoadScannModel;
+
+        //UnityEngine.Mesh mesh = new UnityEngine.Mesh();
+
+        //mesh.vertices = vertex.ToArray();
+        //mesh.triangles = triangle.ToArray();
+        //mesh.normals = CustomMesh.GetNormals(mesh.vertices, mesh.triangles);
+
+
+    }
+}
+
+[Serializable]
+public class ScanningGoalUnity
+{
+    // goal definition
+
+    public float x1;
+    public float y1;
+    public float x2;
+    public float y2;
+
+    public ScanningGoalUnity()
+    {
+        this.x1 = 0f;
+        this.y1 = 0f;
+        this.x2 = 0f;
+        this.y2 = 0f;
+    }
+
+    public ScanningGoalUnity(float x1, float y1, float x2, float y2)
+    {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
     }
 }
