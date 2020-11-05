@@ -12,6 +12,19 @@ using RosSharp.RosBridgeClient.MessageTypes.Geometry;
 using RosSharp.RosBridgeClient.MessageTypes.Shape;
 using UniRx;
 
+public enum StatusOfSystem
+{
+    INIT_SYSTEM,
+    READY_TO_SCAN,
+    GO_TO_TARGET_POINT,
+    SCANNING,
+    SCANNING_SUCCESS,
+    ERROR_SENDING_TRAJECTORY,
+    ERROR_GET_ROBOT_POSITION,
+    ERROR_CONNECTION_TO_SCANNER
+    // ... e.t.
+};
+
 [Serializable]
 public class ScanningActionClient : ActionClient<ScanningAction, ScanningActionGoal, ScanningActionResult,
                                                  ScanningActionFeedback, ScanningGoal, ScanningResult, ScanningFeedback>
@@ -68,7 +81,7 @@ public class ScanningActionClient : ActionClient<ScanningAction, ScanningActionG
     public string GetFeedbackString()
     {
         if (action != null)
-            return string.Join(",", action.action_feedback.feedback.status);
+            return string.Join(",", (StatusOfSystem)action.action_feedback.feedback.status);
         return "";
     }
 

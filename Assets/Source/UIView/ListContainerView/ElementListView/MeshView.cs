@@ -39,7 +39,7 @@ public class MeshView : ElementListView, ISelectHandler
         GameObject loadObject = new GameObject(name, typeof(MeshFilter), typeof(MeshRenderer));
         loadObject.GetComponent<MeshFilter>().mesh = app.model.CurrentLoadScannModel;
         loadObject.GetComponent<MeshRenderer>().material = app.model.baseMaterial;
-        loadObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+        //loadObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         loadObject.AddComponent<MeshCollider>();
         return loadObject;
     }

@@ -10,7 +10,6 @@
 
 
 using RosSharp.RosBridgeClient.MessageTypes.Geometry;
-using System;
 
 namespace RosSharp.RosBridgeClient.MessageTypes.MyPkg
 {
@@ -18,18 +17,18 @@ namespace RosSharp.RosBridgeClient.MessageTypes.MyPkg
     {
         public const string RosMessageName = "my_pkg/TrajectoryService";
 
-        public string request { get; set; }
+        public int motion_type { get; set; }
         public Pose[] rpose { get; set; }
 
         public TrajectoryServiceRequest()
         {
-            this.request = "";
+            this.motion_type = 0;
             this.rpose = new Pose[0];
         }
 
-        public TrajectoryServiceRequest(string request, Pose[] rpose)
+        public TrajectoryServiceRequest(int motion_type, Pose[] rpose)
         {
-            this.request = request;
+            this.motion_type = motion_type;
             this.rpose = rpose;
         }
     }

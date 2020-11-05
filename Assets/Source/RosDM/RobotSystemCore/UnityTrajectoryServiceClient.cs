@@ -9,7 +9,7 @@ public class UnityTrajectoryServiceClient : Element<DemonOLPApplication>
 {
     public TrajectoryServiceRequest request = new TrajectoryServiceRequest();
 
-    public long response;
+    public bool response;
 
     public Vector3[] pose;
     public Quaternion[] rotation;
@@ -37,7 +37,7 @@ public class UnityTrajectoryServiceClient : Element<DemonOLPApplication>
                         orientation = new RosSharp.RosBridgeClient.MessageTypes.Geometry.Quaternion(rq.x, rq.y, rq.z, r.w)
                     };
 
-        request = new TrajectoryServiceRequest("", poses.ToArray());
+        request = new TrajectoryServiceRequest(1, poses.ToArray());
 
         GetComponent<RosSharp.RosBridgeClient.RosConnector>()
             .RosSocket.CallService<TrajectoryServiceRequest, TrajectoryServiceResponse>(serviceName, ServiceHandler, request);

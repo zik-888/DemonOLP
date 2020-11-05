@@ -13,8 +13,8 @@ public class PointToPoint : Element<DemonOLPApplication>, ITrajectory
     protected List<ReferencePoint> referencePoints = new List<ReferencePoint>();
 
     maxCamera mxc;
-    public float basePointSize = 0.1f;
-    public float pointSize = 0.1f;
+    public float basePointSize = 0.03f;
+    public float pointSize = 0.03f;
 
     private void Start()
     {
@@ -32,8 +32,8 @@ public class PointToPoint : Element<DemonOLPApplication>, ITrajectory
     {
         var camDistance = mxc.DesiredDistance;
 
-        basePointSize = camDistance / 50;
-        pointSize = camDistance / 50;
+        //basePointSize = 20 / 50;
+        //pointSize = 20 / 50;
 
         foreach (var a in referencePoints)
         {

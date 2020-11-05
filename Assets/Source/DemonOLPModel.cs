@@ -16,6 +16,10 @@ public class DemonOLPModel : Model<DemonOLPApplication>
     public Material baseMaterial;
     public PathFormMethod pathFormMethod = PathFormMethod.PointToPoint;
     public List<ITrajectory> Trajectories { set; get; } = new List<ITrajectory>();
+
+    public Vector3 deltaModel;
+
+    public Vector4 scannArea;
     /// <summary>
     /// Programm data.
     /// </summary>

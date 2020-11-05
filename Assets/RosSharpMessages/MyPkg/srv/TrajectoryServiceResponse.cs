@@ -9,22 +9,20 @@
 
 
 
-using System;
-
 namespace RosSharp.RosBridgeClient.MessageTypes.MyPkg
 {
     public class TrajectoryServiceResponse : Message
     {
         public const string RosMessageName = "my_pkg/TrajectoryService";
 
-        public long answer { get; set; }
+        public bool answer { get; set; }
 
         public TrajectoryServiceResponse()
         {
-            this.answer = 0;
+            this.answer = false;
         }
 
-        public TrajectoryServiceResponse(long answer)
+        public TrajectoryServiceResponse(bool answer)
         {
             this.answer = answer;
         }

@@ -85,7 +85,7 @@ public class MeshInitializer : Element<DemonOLPApplication>
         mesh.vertices = a;
         mesh.triangles = b;
         //mesh.normals = CustomMesh.GetNormals(a, b);
-        //mesh.RecalculateNormals();
+       //mesh.RecalculateNormals();
 
 
 
