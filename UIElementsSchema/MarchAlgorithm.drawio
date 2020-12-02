@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-12-02T11:43:34.669Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="FTaLaNYHoYD6vrOh4MF_" version="13.10.5" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-02T11:51:56.263Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="BlwvblEfLlABcRXLyK5K" version="13.10.5" type="github">
   <diagram id="rqI_ppBprp_Sd8-UaLiR" name="Page-1">
-    <mxGraphModel dx="1692" dy="436" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+    <mxGraphModel dx="1865" dy="523" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -88,16 +88,49 @@
         <mxCell id="YjNDBlbt8UtDI5Ee4jb6-36" value="" style="shape=mxgraph.bpmn.shape;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;perimeter=ellipsePerimeter;outline=end;symbol=terminate;rounded=0;shadow=0;comic=0;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" vertex="1" parent="1">
           <mxGeometry x="320" y="450" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-38">
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-38" target="YjNDBlbt8UtDI5Ee4jb6-42">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="-320" y="149.99999999999994" as="targetPoint" />
+            <mxPoint x="-520" y="139.99999999999994" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="YjNDBlbt8UtDI5Ee4jb6-38" value="" style="ellipse;whiteSpace=wrap;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fillColor=#000000;fontFamily=Verdana;fontSize=12;align=center;" vertex="1" parent="1">
-          <mxGeometry x="-340" y="80" width="40" height="40" as="geometry" />
+          <mxGeometry x="-540" y="105" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-41" value="&lt;span style=&quot;font-family: &amp;#34;courier new&amp;#34; , &amp;#34;courier&amp;#34; , monospace ; font-size: 13px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;$$\vec{V}=(v1, v2, v3)$$&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-340" y="210" width="40" height="20" as="geometry" />
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-42" target="YjNDBlbt8UtDI5Ee4jb6-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-42" value="Поиск и установка смежных треугольников" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="-600" y="180" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-43" target="YjNDBlbt8UtDI5Ee4jb6-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-43" value="Поиск плоскостей по критерию" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="-600" y="240" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-45" target="YjNDBlbt8UtDI5Ee4jb6-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-45" value="Задание начальной и конечной точки на ребре модели" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="-600" y="310" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-47" target="YjNDBlbt8UtDI5Ee4jb6-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-47" value="Поиск кратчайшего пути между точками с помощью алгоритма A*" style="rounded=1;whiteSpace=wrap;html=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="-615" y="390" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-48" value="Если величина угла между векторами нормалей двух соседних треугольников не превышает некоторое значение, то считается, что эти два треугольника принадлежат к одной плоскости" style="shape=note;whiteSpace=wrap;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;size=20;" vertex="1" parent="1">
+          <mxGeometry x="-400" y="105" width="220" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-50" style="edgeStyle=none;rounded=0;html=1;dashed=1;labelBackgroundColor=none;startArrow=none;startFill=0;startSize=5;endArrow=oval;endFill=0;endSize=5;jettySize=auto;orthogonalLoop=1;strokeWidth=1;fontFamily=Verdana;fontSize=12;entryX=0;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="YjNDBlbt8UtDI5Ee4jb6-43" target="YjNDBlbt8UtDI5Ee4jb6-48">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-350.00136645962743" y="338" as="sourcePoint" />
+            <mxPoint x="-329.93925465838515" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YjNDBlbt8UtDI5Ee4jb6-52" value="" style="shape=mxgraph.bpmn.shape;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;perimeter=ellipsePerimeter;outline=end;symbol=terminate;rounded=0;shadow=0;comic=0;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;" vertex="1" parent="1">
+          <mxGeometry x="-540" y="470" width="40" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
